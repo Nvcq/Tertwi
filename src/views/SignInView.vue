@@ -43,3 +43,31 @@
   </div>
 
 </template>
+
+<script>
+import { mapActions } from "vuex";
+
+export default {
+  data(){
+    return{
+      email: "",
+      password: "",
+    }
+  },
+  methods: {
+    ...mapActions('user', ["setUser"]),
+    async signUser() {
+      const { error, user } = await this.$supabase.auth.signIn({
+        email: this.email,
+        password: this.password,
+      });
+      if (user) {
+        this.setUser(user);
+      }
+      else if (error) {
+        console.log(error);
+      }
+	}
+    }
+}
+</script>
