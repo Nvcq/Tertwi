@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import SignInView from '../views/SignInView.vue';
 import SignUpView from '../views/SignUpView.vue';
 
+// modules
+import {user} from "@/store/modules/user.module";
 
 Vue.use(VueRouter);
 
