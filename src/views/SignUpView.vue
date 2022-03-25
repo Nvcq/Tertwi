@@ -23,7 +23,7 @@
 
             <div class="flex items-center justify-between">
               <div class="text-sm">
-                <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500"> Already a member ? Sign in here </a>
+                <button @click="goTo('signIn')" type="button" class="font-medium text-indigo-600 hover:text-indigo-500"> Already a member ? Log in here </button>
               </div>
             </div>
 
@@ -46,6 +46,9 @@ export default {
     }
   },
   methods: {
+    goTo(name){
+      this.$router.push({name: name})
+    },
     async createUser() {
       const { data: user, error } = await this.$supabase.auth.signUp({
         email: this.email,
@@ -56,8 +59,9 @@ export default {
       }
       else if (error) {
         console.log(error);
+        console.log('oueoueoue');
       }
-		}
+		},
 	}
 }
 </script>
