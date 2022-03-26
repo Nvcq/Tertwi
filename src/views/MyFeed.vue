@@ -4,7 +4,6 @@
     <br>
     <ul id="example-1" class="text-blue">
       <li :key="'post-' + post.id" v-for="post in posts">
-        <h4>{{ post.author }}</h4>
         <p>{{ post.content }}</p>
         <!-- <button @click="deletePost(post.id)">Delete</button> -->
         <br>
@@ -21,6 +20,9 @@
 import { mapState, mapActions } from "vuex";
 
 export default{
+computed: {
+    ...mapState("user", ["user_data"]),
+},
 name: "feed",
 data() {
   return{
@@ -40,7 +42,7 @@ methods: {
     }
   },
   async getAllPosts(){
-    const { data, error } = await this.$supabase.from("posts").select();
+    const { data, error } = await this.$supabase.from("posts").select().match({author: this.user_data.email});
     if(data){
       this.posts = data;
     }else{

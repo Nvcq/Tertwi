@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import SignInView from '../views/SignInView.vue';
 import SignUpView from '../views/SignUpView.vue';
 import Feed from '../views/Feed.vue';
+import MyFeed from '../views/MyFeed.vue';
 
 import { supabase } from "./../supabase.js";
 
@@ -32,6 +33,14 @@ const routes = [
     path: '/feed',
     name: 'feed',
     component: Feed,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/myfeed',
+    name: 'myfeed',
+    component: MyFeed,
     meta: {
       requireAuth: true,
     },
