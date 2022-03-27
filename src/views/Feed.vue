@@ -129,10 +129,10 @@
     <!--middle creat tweet-->
     <div class="flex">
         <div class="m-2 w-10 py-1">
-            <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
+            <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1431768084851875846/lLA7xuZo_400x400.jpg" alt="">
         </div>
         <div class="flex-1 px-2 pt-2 mt-2">
-            <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50" placeholder="What's happening?"></textarea>
+            <textarea v-model="content" name="content" id="content" class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50" placeholder="What's happening?"></textarea>
         </div>
     </div>
     <!--middle creat tweet below icons-->
@@ -182,7 +182,7 @@
         </div>
 
         <div class="flex-1">
-            <button class="bg-blue-400 hover:bg-blue-500 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+            <button type="submit" @click="createPost()" class="bg-blue-400 hover:bg-blue-500 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
                 Tweet
             </button>
         </div>
@@ -191,30 +191,21 @@
     <hr class="border-gray-800 border-4">
 </aside>
 
- <!-- <ul id="example-1" class="text-blue">
+    <ul class="list-none overflow-x-hidden overflow-y-scroll" style="height:73vh">
       <li :key="'post-' + post.id" v-for="post in posts">
-        <h4>{{ post.author }}</h4>
-        <p>{{ post.content }}</p>
-        <br>
-        <br>
-      </li>
-    </ul> -->
 
-    <ul class="list-none h-screen overflow-x-hidden overflow-y-scroll">
-      <li>
-                    <!--second tweet-->
         <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
             <div class="flex flex-shrink-0 p-4 pb-0">
                 <a href="#" class="flex-shrink-0 group block">
                     <div class="flex items-center">
                         <div>
-                            <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
+                            <img class="inline-block h-10 w-10 rounded-full" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png" alt="">
                         </div>
                         <div class="ml-3">
                             <p class="text-base font-bold leading-6 font-medium text-white">
-                                Email
+                                {{ post.author }}
                                 <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                    • Date
+                                     • {{ post.created_at.slice(0, 10) }}   <!-- slice to get a better date format -->
                                 </span>
                             </p>
                         </div>
@@ -225,11 +216,75 @@
 
             <div class="pl-16">
                 <p class="text-left text-base width-auto font-medium text-white flex-shrink">
-                    content
+                    {{ post.content }}
                 </p>
 
+                <div class="flex items-center py-4">
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path>
+                        </g>
+                      </svg>
+                      {{ Math.round(Math.random() * (99 - 0) + 0) }}  <!-- Randomize the number of answers -->
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path>
+                        </g>
+                      </svg>
+                      {{ Math.round(Math.random() * (999 - 0) + 0) }} <!-- Randomize the number of retweets -->
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
+                        </g>
+                      </svg>
+                      {{ Math.round(Math.random() * (999 - 0) + 0) }} <!-- Randomize the number of likes -->
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z"></path>
+                          <path d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z"></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+
+              </div>
+              <hr class="border-gray-800">
+          </article>
+        </li>
+
+        <li>
+
+        <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+            <div class="flex flex-shrink-0 p-4 pb-0">
+                <a href="#" class="flex-shrink-0 group block">
+                    <div class="flex items-center">
+                        <div>
+                            <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1455182232155459593/21ttpzJu_400x400.jpg" alt="Yugobe">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-base font-bold leading-6 font-medium text-white">
+                                Quentin Guerrier
+                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                     • 2022-03-27
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
 
+            <div class="pl-16">
+                <p class="text-left text-base width-auto font-medium text-white flex-shrink">
+                    Bravo Nicolas Mopin pour le 20/20 en headless-cms !!! Impressionant 😮 Ce mec c'est le goat du dev web srx
+                </p>
 
                 <div class="flex items-center py-4">
                     <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
@@ -246,7 +301,7 @@
                           <path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path>
                         </g>
                       </svg>
-                      14 k
+                      958 k
                     </div>
                     <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
                       <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
@@ -272,83 +327,71 @@
         </li>
 
         <li>
-                      <!--second tweet-->
-          <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
-              <div class="flex flex-shrink-0 p-4 pb-0">
-                  <a href="#" class="flex-shrink-0 group block">
-                      <div class="flex items-center">
-                          <div>
-                              <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="">
-                          </div>
-                          <div class="ml-3">
-                              <p class="text-base leading-6 font-medium text-white">
-                                  Sonali Hirave
-                                  <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
-                                      @ShonaDesign  . 16 April
-                                  </span>
-                              </p>
-                          </div>
-                      </div>
-                  </a>
-              </div>
 
-
-              <div class="pl-16">
-                  <p class="text-base width-auto font-medium text-white flex-shrink">
-                      Day 07 of the challenge <a href="#" class="text-blue-400">#100DaysOfCode</a>
-                      I was wondering what I can do with <a href="#" class="text-blue-400">#tailwindcss</a>, so just started building
-                      Twitter UI using Tailwind and so far it looks so promising. I will post my code after completion.
-                      [07/100]
-                      <a href="#" class="text-blue-400"> #WomenWhoCode #CodeNewbie</a>
-                  </p>
-
-                  <div class="md:flex-shrink pr-6 pt-3">
-                      <div class="bg-cover bg-no-repeat bg-center rounded-lg w-full h-64" style="height: 200px; background-image: url(https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80);">
-                      <img class="opacity-0 w-full h-full" src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=448&amp;q=80" alt="">
-                  </div>
-                  </div>
-
-
-                  <div class="flex items-center py-4">
-                      <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                          <g>
-                            <path d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path>
-                          </g>
-                        </svg>
-                        12.3 k
-                      </div>
-                      <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                          <g>
-                            <path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path>
-                          </g>
-                        </svg>
-                        14 k
-                      </div>
-                      <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                          <g>
-                            <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
-                          </g>
-                        </svg>
-                        14 k
-                      </div>
-                      <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
-                        <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                          <g>
-                            <path d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z"></path>
-                            <path d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z"></path>
-                          </g>
-                        </svg>
-                      </div>
+        <article class="hover:bg-gray-800 transition duration-350 ease-in-out">
+            <div class="flex flex-shrink-0 p-4 pb-0">
+                <a href="#" class="flex-shrink-0 group block">
+                    <div class="flex items-center">
+                        <div>
+                            <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1443700700240875525/nbK5RGp-_400x400.jpg" alt="Yugobe">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-base font-bold leading-6 font-medium text-white">
+                                Hugo
+                                <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+                                     • 2022-03-22
+                                </span>
+                            </p>
+                        </div>
                     </div>
+                </a>
+            </div>
+
+
+            <div class="pl-16">
+                <p class="text-left text-base width-auto font-medium text-white flex-shrink">
+                    RT si je suis une grosse merde 💩💩
+                </p>
+
+                <div class="flex items-center py-4">
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M14.046 2.242l-4.148-.01h-.002c-4.374 0-7.8 3.427-7.8 7.802 0 4.098 3.186 7.206 7.465 7.37v3.828c0 .108.044.286.12.403.142.225.384.347.632.347.138 0 .277-.038.402-.118.264-.168 6.473-4.14 8.088-5.506 1.902-1.61 3.04-3.97 3.043-6.312v-.017c-.006-4.367-3.43-7.787-7.8-7.788zm3.787 12.972c-1.134.96-4.862 3.405-6.772 4.643V16.67c0-.414-.335-.75-.75-.75h-.396c-3.66 0-6.318-2.476-6.318-5.886 0-3.534 2.768-6.302 6.3-6.302l4.147.01h.002c3.532 0 6.3 2.766 6.302 6.296-.003 1.91-.942 3.844-2.514 5.176z"></path>
+                        </g>
+                      </svg>
+                      12.3 k
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-green-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path>
+                        </g>
+                      </svg>
+                      958 k
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-red-600 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M12 21.638h-.014C9.403 21.59 1.95 14.856 1.95 8.478c0-3.064 2.525-5.754 5.403-5.754 2.29 0 3.83 1.58 4.646 2.73.814-1.148 2.354-2.73 4.645-2.73 2.88 0 5.404 2.69 5.404 5.755 0 6.376-7.454 13.11-10.037 13.157H12zM7.354 4.225c-2.08 0-3.903 1.988-3.903 4.255 0 5.74 7.034 11.596 8.55 11.658 1.518-.062 8.55-5.917 8.55-11.658 0-2.267-1.823-4.255-3.903-4.255-2.528 0-3.94 2.936-3.952 2.965-.23.562-1.156.562-1.387 0-.014-.03-1.425-2.965-3.954-2.965z"></path>
+                        </g>
+                      </svg>
+                      14 k
+                    </div>
+                    <div class="flex-1 flex items-center text-white text-xs text-gray-400 hover:text-blue-400 transition duration-350 ease-in-out">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
+                        <g>
+                          <path d="M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z"></path>
+                          <path d="M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z"></path>
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
 
               </div>
               <hr class="border-gray-800">
           </article>
         </li>
-
 
       </ul>
     </section>
@@ -375,7 +418,7 @@
   <div class="max-w-sm rounded-lg bg-dim-700 overflow-hidden shadow-lg m-4">
       <div class="flex">
           <div class="flex-1 m-2">
-              <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">Germany trends</h2>
+              <h2 class="px-4 py-2 text-xl w-48 font-semibold text-white">France trends</h2>
           </div>
           <div class="flex-1 px-4 py-2 m-2">
               <a href="" class=" text-2xl rounded-full text-white hover:bg-gray-800 hover:text-blue-300 float-right">
@@ -395,8 +438,8 @@
       <div class="flex">
           <div class="flex-1">
               <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">1 . Trending</p>
-              <h2 class="px-4 ml-2 w-48 font-bold text-white">#Microsoft363</h2>
-              <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,466 Tweets</p>
+              <h2 class="px-4 ml-2 w-48 font-bold text-white">#GomarEnIWM</h2>
+              <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">55,466 Tweets</p>
 
           </div>
           <div class="flex-1 px-4 py-2 m-2">
@@ -414,7 +457,7 @@
       <div class="flex">
           <div class="flex-1">
               <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">2 . Politics . Trending</p>
-              <h2 class="px-4 ml-2 w-48 font-bold text-white">#HI-Fashion</h2>
+              <h2 class="px-4 ml-2 w-48 font-bold text-white">Fuck le Z</h2>
               <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">8,464 Tweets</p>
 
           </div>
@@ -432,8 +475,8 @@
 
       <div class="flex">
           <div class="flex-1">
-              <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">3 . Rock . Trending</p>
-              <h2 class="px-4 ml-2 w-48 font-bold text-white">#Ferrari</h2>
+              <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">3 . Music . Trending</p>
+              <h2 class="px-4 ml-2 w-48 font-bold text-white">NI GOAT</h2>
               <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">5,586 Tweets</p>
 
           </div>
@@ -451,8 +494,8 @@
 
       <div class="flex">
           <div class="flex-1">
-              <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">4 . Auto Racing . Trending</p>
-              <h2 class="px-4 ml-2 w-48 font-bold text-white">#vettel</h2>
+              <p class="px-4 ml-2 mt-3 w-48 text-xs text-gray-400">4 . Football . Trending</p>
+              <h2 class="px-4 ml-2 w-48 font-bold text-white">#1LDCPourParisSVP</h2>
               <p class="px-4 ml-2 mb-3 w-48 text-xs text-gray-400">9,416 Tweets</p>
 
           </div>
@@ -619,10 +662,14 @@ svg.paint-icon {
 import { mapState, mapActions } from "vuex";
 
 export default{
+computed: {
+    ...mapState("user", ["user_data"]),
+},
 name: "feed",
 data() {
   return{
   posts: [],
+  content: "",
   };
 },
 created(){
@@ -630,11 +677,19 @@ created(){
 },
 methods: {
   async getAllPosts(){
-    const { data, error } = await this.$supabase.from("posts").select();
+    const { data, error } = await this.$supabase.from("posts").select().order('created_at', { ascending: false });
     if(data){
       this.posts = data;
     }else{
       console.log(error);
+    }
+  },
+  async createPost() {
+    const { data, error } = await this.$supabase.from('posts').insert([{ content: this.content, author: this.user_data.email }]);
+    if(error) {
+      console.log(error);
+    } else if (data) {
+        location.reload();
     }
   }
 }
