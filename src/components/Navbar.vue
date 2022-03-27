@@ -3,7 +3,7 @@
   <div class="md:flex md:items-center md:justify-between p-5 bg-black">
     <div class="flex-1 min-w-0">
       <h2 class="text-2xl font-bold leading-7 text-white sm:text-3xl sm:truncate" :class="user_data.role ? 'text-left' : 'text-center m-3'">  <!-- Ternary condition to put the title in the center when not logged in because there are no buttons on the right -->
-        Twittagram
+        Tertwi
       </h2>
     </div>
 

@@ -6,7 +6,6 @@
       <li :key="'post-' + post.id" v-for="post in posts">
         <h4>{{ post.author }}</h4>
         <p>{{ post.content }}</p>
-        <!-- <button @click="deletePost(post.id)">Delete</button> -->
         <br>
         <br>
       </li>
@@ -31,14 +30,6 @@ created(){
     this.getAllPosts();
 },
 methods: {
-  async deletePost(id){
-    const { data, error } = await this.$supabase.from("posts").delete().match({ id: id});
-    if (data){
-      this.getAllPosts();
-    } else {
-      console.log(error);
-    }
-  },
   async getAllPosts(){
     const { data, error } = await this.$supabase.from("posts").select();
     if(data){
