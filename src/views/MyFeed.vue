@@ -38,6 +38,15 @@
             </a>
           </div>
 
+          <div @click="signOut">
+            <a class="cursor-pointer mt-1 text-red-600 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-red-900">
+                <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Déconnexion
+            </a>
+          </div>
+
             <button class="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
                 Tweet
             </button>
@@ -158,7 +167,7 @@
     <ul class="list-none overflow-x-hidden overflow-y-scroll" style="height:73vh">
       <li :key="'post-' + post.id" v-for="post in posts">
 
-        <article @click="goToPost(post.id)" class="hover:bg-gray-800 transition duration-350 ease-in-out">
+        <article @click="goToPost(post.id)" class="cursor-pointer hover:bg-gray-800 transition duration-350 ease-in-out">
             <div class="flex flex-shrink-0 p-4 pb-0">
                 <a href="#" class="flex-shrink-0 group block">
                     <div class="flex items-center">
@@ -476,6 +485,7 @@ created(){
     this.getAllPosts();
 },
 methods: {
+  ...mapActions("user", ["setUser"]),
   goTo(name){
       this.$router.push({name: name})
   },
@@ -501,6 +511,15 @@ methods: {
       console.log(error);
     } else if (data) {
         this.getAllPosts();
+    }
+  },
+  async signOut() {
+    const { error } = await this.$supabase.auth.signOut();
+    if(error) {
+      console.log(error);
+    } else {
+      this.setUser({});
+      this.goTo("signIn");
     }
   },
 }
