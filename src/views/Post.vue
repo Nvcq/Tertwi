@@ -20,25 +20,24 @@
 
         <!-- Nav-->
         <nav class="mt-5 px-2">
-            <a href="#" class="group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full bg-gray-800 text-blue-300">
+            <div @click="goTo('feed')">
+            <a class="cursor-pointer group flex items-center px-2 py-2 text-base leading-6 font-semibold rounded-full bg-gray-800 text-blue-300">
                 <svg class="mr-4 h-6 w-6 " stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6"></path>
                 </svg>
                 Home
             </a>
+          </div>
 
-            <a href="myfeed" class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
-                <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                Profile
+
+          <div @click="goTo('myfeed')">
+              <a class="cursor-pointer mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
+              <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+              </svg>
+              Profile
             </a>
-            <a href="#" class="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-gray-800 hover:text-blue-300">
-                <svg class="mr-4 h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                More
-            </a>
+          </div>
 
             <button class="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
                 Tweet
@@ -77,7 +76,7 @@
                             <aside>
     <div class="flex">
         <div class="flex-1 mx-2">
-            <h2 class="px-4 py-2 text-xl font-semibold text-white">Home</h2>
+            <h2 class="px-4 py-2 text-xl font-semibold text-white">Post</h2>
         </div>
         <div class="flex-1 px-4 py-2 mx-2">
             <a href="" class=" text-2xl font-medium rounded-full text-white hover:bg-gray-800 hover:text-blue-300 float-right">
@@ -95,6 +94,43 @@
 
 
 </aside>
+
+<article class="transition duration-350 ease-in-out">
+  <div class="flex flex-shrink-0 p-4 pb-0">
+      <a href="#" class="flex-shrink-0 group block">
+          <div class="flex items-center">
+              <div>
+                  <img class="inline-block h-10 w-10 rounded-full" src="https://pbs.twimg.com/profile_images/1431768084851875846/lLA7xuZo_400x400.jpg" alt="">
+                  <!-- Ternary to put a profile picture only on our tweets -->
+              </div>
+              <div class="ml-3">
+                  <p class="text-base font-bold leading-6 font-medium text-white">
+                      {{ post.author }}
+                  </p>
+              </div>
+          </div>
+      </a>
+  </div>
+
+
+  <div class="pl-16">
+
+      <textarea type="text" name="content" v-model="post.content" id="content" autocomplete="content" style="background-color: #15202b" rows="2" cols="50" class="text-left text-base width-auto font-medium text-white flex-shrink w-11/12"></textarea>
+
+      <div class="flex items-center py-4">
+        <span class="text-sm leading-5 font-medium text-gray-400 group-hover:text-gray-300 transition ease-in-out duration-150">
+          {{ post.created_at }}   <!-- slice to get a better date format -->
+        </span>
+
+      </div>
+
+    </div>
+    <div class="w-full flex justify-around text-red-600">
+      <button type="submit" @click="updatePost()">Update</button>
+      <button @click="deletePost(post.id)">Delete</button>
+    </div>
+    <hr class="border-gray-800">
+</article>
 
     </section>
 
@@ -329,6 +365,35 @@
 </div>
 </template>
 
+<style>
+    .overflow-y-auto::-webkit-scrollbar, .overflow-y-scroll::-webkit-scrollbar, .overflow-x-auto::-webkit-scrollbar, .overflow-x::-webkit-scrollbar, .overflow-x-scroll::-webkit-scrollbar, .overflow-y::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.overflow-y-auto, .overflow-y-scroll, .overflow-x-auto, .overflow-x, .overflow-x-scroll, .overflow-y, body {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.bg-dim-700 {
+  --bg-opacity: 1;
+  background-color: #192734;
+}
+
+html, body {
+  margin: 0;
+  background-color: #15202b;
+}
+
+svg.paint-icon {
+  fill: currentcolor;
+}
+
+</style>
+
 
 <script>
 export default {
@@ -345,6 +410,9 @@ export default {
     this.getPost();
   },
   methods: {
+    goTo(name){
+      this.$router.push({name: name});
+    },
     async getPost() {
       const { data, error } = await this.$supabase.from("posts").select().match({ id: this.$route.params.id }).single();
       if (data) {
@@ -356,7 +424,7 @@ export default {
     async updatePost() {
       const { data, error } = await this.$supabase.from("posts").update(this.post).match({ id: this.$route.params.id });
       if (data) {
-        this.$router.push({ name: "myfeed" });
+        this.goTo('myfeed');
       } else {
         console.log(error);
       }
@@ -364,7 +432,7 @@ export default {
     async deletePost(id){
       const { data, error } = await this.$supabase.from("posts").delete().match({ id: id});
       if (data){
-        this.$router.push({name: "myfeed"});
+        this.goTo('myfeed');
       } else {
         console.log(error);
       }
