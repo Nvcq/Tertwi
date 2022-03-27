@@ -15,6 +15,7 @@
       <li :key="'post-' + post.id" v-for="post in posts">
         <p>{{ post.content }}</p>
         <button @click="deletePost(post.id)">Delete</button>
+        <button @click="goToPost(post.id)">Update</button>
         <br>
         <br>
       </li>
@@ -45,6 +46,14 @@ created(){
 methods: {
   goTo(name){
       this.$router.push({name: name})
+  },
+  goToPost(post) {
+    this.$router.push({
+      name: 'post',
+      params: {
+        id: post,
+      },
+    });
   },
   async deletePost(id){
     const { data, error } = await this.$supabase.from("posts").delete().match({ id: id});
