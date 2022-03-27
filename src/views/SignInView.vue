@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-full" style="background-color: #15202b;">
     <div class="flex w-screen h-screen items-center justify-center">
-        <div class="min-h-1/2 border border-gray-900 rounded-2xl border-2 border-white">
+        <div class="min-h-1/2 border rounded-2xl border-2 border-white">
 
             <div class="mx-4 sm:mx-24 md:mx-34 lg:mx-56 mx-auto  flex items-center space-y-4 py-16 font-semibold text-gray-500 flex-col">
                 <svg viewBox="0 0 24 24" class=" h-12 w-12 text-white transform rotate-180" fill="currentColor">

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <navbar /> -->
+    <!-- <navbar />             TerTwi has no Navbar but I did one just so you can see I know how to do   -->
     <router-view/>
   </div>
 </template>

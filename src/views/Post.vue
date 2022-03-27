@@ -48,9 +48,6 @@
             </a>
           </div>
 
-            <button class="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
-                Tweet
-            </button>
         </nav>
 
 
@@ -296,7 +293,7 @@
 
           </div>
           <div class="flex-1 px-4 py-2 m-2">
-              <a href="" class=" float-right">
+              <a href="https://twitter.com/yugobe_hugo" class=" float-right">
                   <button class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
                       Follow
                   </button>
@@ -430,31 +427,23 @@ export default {
       const { data, error } = await this.$supabase.from("posts").select().match({ id: this.$route.params.id }).single();
       if (data) {
         this.post = data;
-      } else {
-        console.log(error);
       }
     },
     async updatePost() {
       const { data, error } = await this.$supabase.from("posts").update(this.post).match({ id: this.$route.params.id });
       if (data) {
         this.goTo('myfeed');
-      } else {
-        console.log(error);
       }
     },
     async deletePost(id){
       const { data, error } = await this.$supabase.from("posts").delete().match({ id: id});
       if (data){
         this.goTo('myfeed');
-      } else {
-        console.log(error);
       }
     },
     async signOut() {
       const { error } = await this.$supabase.auth.signOut();
-      if(error) {
-        console.log(error);
-      } else {
+      if(!error) {
         this.setUser({});
         this.goTo("signIn");
       }

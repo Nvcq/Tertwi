@@ -48,7 +48,7 @@
           </div>
 
             <button class="bg-blue-400 hover:bg-blue-500 w-full mt-5 text-white font-bold py-2 px-4 rounded-full">
-                Tweet
+                Tertweet
             </button>
         </nav>
 
@@ -156,7 +156,7 @@
 
         <div class="flex-1">
             <button type="submit" @click="createPost()" class="bg-blue-400 hover:bg-blue-500 mt-5 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
-                Tweet
+                Tertweet
             </button>
         </div>
     </div>
@@ -388,7 +388,7 @@
 
           </div>
           <div class="flex-1 px-4 py-2 m-2">
-              <a href="" class=" float-right">
+              <a href="https://twitter.com/yugobe_hugo" class=" float-right">
                   <button class="bg-transparent hover:bg-gray-800 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded-full">
                       Follow
                   </button>
@@ -531,23 +531,17 @@ methods: {
     const { data, error } = await this.$supabase.from("posts").select().match({author: this.user_data.email}).order('created_at', { ascending: false });
     if(data){
       this.posts = data;
-    }else{
-      console.log(error);
     }
   },
   async createPost() {
     const { data, error } = await this.$supabase.from('posts').insert([{ content: this.content, author: this.user_data.email }]);
-    if(error) {
-      console.log(error);
-    } else if (data) {
-        this.getAllPosts();
+    if(data) {
+      this.getAllPosts();
     }
   },
   async signOut() {
     const { error } = await this.$supabase.auth.signOut();
-    if(error) {
-      console.log(error);
-    } else {
+    if(!error) {
       this.setUser({});
       this.goTo("signIn");
     }
