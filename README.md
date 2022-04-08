@@ -1,4 +1,17 @@
-# vue-cours
+# Découvrez Tertwi 🐦
+
+## Identifiants
+```
+nicolas.mopin@gmail.com : Azerty123!
+```
+```
+bob@gmail.com : azerty
+```
+
+## Tertwi en ligne
+```
+https://fantastic-sprinkles-28de5b.netlify.app/
+```
 
 ## Project setup
 ```
