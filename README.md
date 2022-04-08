@@ -13,7 +13,7 @@ bob@gmail.com : azerty
 https://fantastic-sprinkles-28de5b.netlify.app/
 ```
 
-## Tertwi en ligne :
+## Tertwi en local :
 ## Project setup
 ```
 npm install
