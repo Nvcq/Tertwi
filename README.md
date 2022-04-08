@@ -8,11 +8,12 @@ nicolas.mopin@gmail.com : Azerty123!
 bob@gmail.com : azerty
 ```
 
-## Tertwi en ligne
+## Tertwi en ligne :
 ```
 https://fantastic-sprinkles-28de5b.netlify.app/
 ```
 
+## Tertwi en ligne :
 ## Project setup
 ```
 npm install
